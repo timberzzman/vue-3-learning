@@ -1,8 +1,8 @@
 <template>
   <div class="submit-form">
-    <div v-if="!submitted">
-      <div class="form-group">
-        <label for="title">Title</label>
+    <form v-if="!submitted">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
         <input
             type="text"
             class="form-control"
@@ -12,8 +12,8 @@
             name="title"
         />
       </div>
-      <div class="form-group">
-        <label for="description">Description</label>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
         <input
             class="form-control"
             id="description"
@@ -22,8 +22,8 @@
             name="description"
         />
       </div>
-      <button @click="saveTutorial" class="btn btn-success">Submit</button>
-    </div>
+      <button type="button" @click="saveTutorial" class="btn btn-success">Submit</button>
+    </form>
     <div v-else>
       <h4>You submitted successfully!</h4>
       <button class="btn btn-success" @click="newTutorial">Add</button>
