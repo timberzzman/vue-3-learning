@@ -29,6 +29,7 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VUE3_LEARNING_32855 }}'
           projectId: vue3-learning-32855
+          channelId: live
 
       - name: Publish deployed code
         uses: actions/upload-artifact@v2
