@@ -2,9 +2,9 @@ name: Deploy to Firebase Hosting on push in main
 on:
   push:
     branches: [main]
-    
+
 env:
-  VITE_FB_API_KEY: $secrets.VITE_FB_API_KEY
+  VITE_FB_API_KEY: ${{ secrets.VITE_FB_API_KEY }}
 
 jobs:
   build:
