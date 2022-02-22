@@ -1,0 +1,37 @@
+name: Deploy to Firebase Hosting on push in main
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    name: Build and deploy main
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.5.1
+
+
+      - name: Cache node modules
+        uses: actions/cache@v2.1.7
+        with:
+          path: ~/node_modules
+          key: cache-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install and build
+        run:
+          npm install
+          npm run build
+
+      - name: Deploy to Firebase hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VUE3_LEARNING_32855 }}'
+          projectId: vue3-learning-32855
+
+      - name: Publish deployed code
+        uses: actions/upload-artifact@v2
+        with:
+          name: published
+          path: dist
