@@ -42,8 +42,14 @@
     <button class="badge bg-danger me-2 border-0" @click="deleteTutorial">
       Delete
     </button>
-    <button type="submit" class="badge bg-success border-0" @click="updateTutorial">
+    <button type="submit" class="badge bg-success me-2 border-0" @click="updateTutorial">
       Update
+    </button>
+    <button
+      type="submit"
+      class="badge bg-secondary border-0"
+      @click="this.$router.push({ name: 'tutorial', params: { id: this.currentTutorial.key } })">
+      Watch tutorial
     </button>
     <p>{{ message }}</p>
   </div>

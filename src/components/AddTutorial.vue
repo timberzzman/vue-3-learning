@@ -2,25 +2,21 @@
   <div class="submit-form">
     <form v-if="!submitted">
       <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
-        <input
-            type="text"
-            class="form-control"
-            id="title"
-            required
-            v-model="tutorial.title"
-            name="title"
-        />
+        <label class="form-label">Title</label>
+        <ckeditor
+          :editor="editor"
+          v-model="tutorial.title"
+          :config="editorConfig"
+          @ready="onReady">
+        </ckeditor>
       </div>
       <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <input
-            class="form-control"
-            id="description"
-            required
-            v-model="tutorial.description"
-            name="description"
-        />
+        <ckeditor
+          :editor="editor"
+          v-model="tutorial.description"
+          :config="editorConfig"
+          @ready="onReady">
+        </ckeditor>
       </div>
       <button type="button" @click="saveTutorial" class="btn btn-success">Submit</button>
     </form>
@@ -32,6 +28,7 @@
 </template>
 
 <script>
+import DocEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import TutorialDataService from '../services/TutorialDataService';
 
 export default {
@@ -44,9 +41,18 @@ export default {
         published: false,
       },
       submitted: false,
+      editor: DocEditor,
+      editorConfig: {
+      },
     };
   },
   methods: {
+    onReady(editor) {
+      editor.ui.getEditableElement().parentElement.insertBefore(
+        editor.ui.view.toolbar.element,
+        editor.ui.getEditableElement(),
+      );
+    },
     saveTutorial() {
       const data = {
         title: this.tutorial.title,

@@ -12,6 +12,11 @@ const routes = [
     name: 'add',
     component: () => import('./components/AddTutorial.vue'),
   },
+  {
+    path: '/tutorial/:id',
+    name: 'tutorial',
+    component: () => import('./components/TutorialPage.vue'),
+  },
 ];
 const router = createRouter({
   history: createWebHistory(),

@@ -26,7 +26,6 @@
       </div>
     </nav>
     <div class="container mt-3">
-      <h2>Vue 3 Firebase CRUD example</h2>
       <router-view />
     </div>
   </div>

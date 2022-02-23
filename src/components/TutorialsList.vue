@@ -6,7 +6,7 @@
         <li
             class="list-group-item"
             :class="{ active: index === currentIndex }"
-            v-for="(tutorial, index) in tutorials"
+            v-for="(tutorial, index) in tutorialsStore.tutorials"
             :key="index"
             @click="setActiveTutorial(tutorial, index)"
         >
@@ -33,9 +33,11 @@
 </template>
 
 <script>
+import { onMounted } from 'vue';
 import { onValue } from 'firebase/database';
 import TutorialDataService from '../services/TutorialDataService';
 import TutorialDetails from './Tutorial.vue';
+import useTutorialsStore from '../stores/tutorialsStore';
 
 export default {
   name: 'tutorialsList',
@@ -46,6 +48,17 @@ export default {
       currentTutorial: null,
       unsubscribeTutorial: null,
       currentIndex: -1,
+    };
+  },
+  setup() {
+    const tutorialsStore = useTutorialsStore();
+
+    onMounted(async () => {
+      await tutorialsStore.initTutorialsListener();
+    });
+
+    return {
+      tutorialsStore,
     };
   },
   methods: {
